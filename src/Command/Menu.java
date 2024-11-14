@@ -1,25 +1,28 @@
+package Command;
+
+import models.PassengerTrain;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-interface Command {
-    void execute();
-}
-
 public class Menu {
     private final Map<Integer, Command> commands;
+    private List<PassengerTrain> trains;
 
-    public Menu() {
+    public Menu(List<PassengerTrain> trains) {
+        this.trains = trains;
         commands = new HashMap<>();
-        commands.put(1, new AddTrainMenu());
-        commands.put(2, new AddWagonMenu());
-        commands.put(3, new RemoveWagonMenu());
-        commands.put(4, new DeleteTrainMenu());
-        commands.put(5, new SaveTrainsToFileMenu());
-        commands.put(6, new LoadTrainsFromFileMenu());
-        commands.put(7, new CalculateTotalPassengersMenu());
-        commands.put(8, new SortWagonsMenu());
-        commands.put(9, new FindWagonsMenu());
+
+        commands.put(1, new AddTrainMenu(trains));
+        commands.put(2, new AddWagonMenu(trains));
+        commands.put(3, new RemoveWagonMenu(trains));
+        commands.put(4, new DeleteTrainMenu(trains));
+        commands.put(5, new SaveTrainsToFileMenu(trains));
+        commands.put(6, new LoadTrainsFromFileMenu(trains));
+        commands.put(7, new CalculateTotalPassengersMenu(trains));
+        commands.put(8, new SortWagonsMenu(trains));
+        commands.put(9, new FindWagonsMenu(trains));
     }
 
     public void showMenu() {
